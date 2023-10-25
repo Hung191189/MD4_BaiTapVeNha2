@@ -1,0 +1,21 @@
+.menu{
+    border: 1px solid;
+    display: flex;
+    column-gap: 20px;
+    padding: 20px;
+}
+.body{
+    height: 600px;
+    display: flex;
+}
+.main{
+    width: 70%;
+    height: 600px;
+    border: 1px solid;
+
+}
+.sideBar{
+    width: 30%;
+    height: 600px;
+    border: 1px solid;
+}
