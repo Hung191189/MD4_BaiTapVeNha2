@@ -1,10 +1,19 @@
 package com.example.md4_baitapvenha2.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,72 +29,10 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Blog_Advertisement",
+            joinColumns = @JoinColumn(name = "blog_id"),
+            inverseJoinColumns = @JoinColumn(name = "advertisement_id"))
 
-    public Blog() {
-    }
-
-    public Blog(Long idBlog, String content, String title, LocalDateTime time, User user, Category category) {
-        this.idBlog = idBlog;
-        this.content = content;
-        this.title = title;
-        this.time = time;
-        this.user = user;
-        this.category = category;
-    }
-
-    public Blog(String content, String title, LocalDateTime time, User user, Category category) {
-        this.content = content;
-        this.title = title;
-        this.time = time;
-        this.user = user;
-        this.category = category;
-    }
-
-    public Long getIdBlog() {
-        return idBlog;
-    }
-
-    public void setIdBlog(Long idBlog) {
-        this.idBlog = idBlog;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    private Set<Advertisement> advertisementSet = new HashSet<>();
 }

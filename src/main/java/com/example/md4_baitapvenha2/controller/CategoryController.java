@@ -30,14 +30,14 @@ public class CategoryController {
         categoryService.save(category);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category){
         Optional<Category> categoryOptional = categoryService.findById(id);
         category.setIdCategory(categoryOptional.get().getIdCategory());
         categoryService.save(category);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Category> deleteCategory(@PathVariable Long id){
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

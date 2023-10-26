@@ -29,7 +29,7 @@ public class BlogController {
         blogService.save(blog);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Blog> updateBlog(@PathVariable Long id, @RequestBody Blog blog){
         Optional<Blog> blogOptional = blogService.findById(id);
         if(!blogOptional.isPresent()){
@@ -39,7 +39,7 @@ public class BlogController {
         blogService.save(blog);
         return new ResponseEntity<>(blog, HttpStatus.ACCEPTED);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Blog> deleteBlog(@PathVariable Long id){
         blogService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
